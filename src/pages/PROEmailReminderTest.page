@@ -1,0 +1,8 @@
+<apex:page controller="RunPROJOB">
+  <apex:form >
+      <apex:messages />
+      <apex:commandButton value="Run Job" action="{!runJob}" />
+      &nbsp;&nbsp;&nbsp;
+      <apex:commandButton value="Clear Data" action="{!ClearData}" />
+  </apex:form>
+</apex:page>

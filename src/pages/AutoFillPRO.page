@@ -1,0 +1,13 @@
+<apex:page controller="AutoFillPROController" action="{!initAction}">
+ <apex:form >
+     <apex:messages />
+     <apex:outputPanel id="PROMSG" rendered="{!isAuthenticated}">
+         Your PRO filled successfully.
+     </apex:outputPanel>
+     
+     
+     <apex:pageBlock title="Auto Fill PRO" rendered="{!NOT(isAuthenticated)}">
+            <apex:commandButton action="{!authenticate}" value="Authenticate with Dimagi email" />
+        </apex:pageBlock>
+ </apex:form>
+</apex:page>

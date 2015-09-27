@@ -1,0 +1,55 @@
+<apex:page title="Project report out" docType="html-5.0"
+    controller="ProjectReportOutController">
+<head>
+    <style type="text/css">
+        .pro-label {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    Submission Successful!<br/><br/>
+    An email has been sent to you and everyone on the project report out email list for this project. <br/><br/>
+    
+    <apex:outputLink target="_blank" value="https://confluence.dimagi.com/display/internal/Project+Report+Outs">https://confluence.dimagi.com/display/internal/Project+Report+Outs</apex:outputLink>
+    <br/><br/>
+    <apex:PageBlock >
+        <apex:form >
+            <apex:pageBlockSection >
+                <apex:pageBlockSectionItem >
+                    <apex:commandButton action="{!submitAnother}" value="  Submit Another One  "></apex:commandButton>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+        </apex:form>
+    </apex:PageBlock>
+
+    <apex:PageBlock >
+        <b>Report Out Name:</b> {!pro.Name}<br/><br/>
+        <b>Resource Planning:</b> {!pro.Resource_Planning__c}<br/><br/>
+        <b>Overall Status:</b> {!pro.Status__c}<br/><br/>
+        <b>Ability to meet Schedule:</b> {!pro.Ability_to_meet_Schedule__c}<br/><br/>
+        <b>Ability to stay within Scope:</b> {!pro.Ability_to_stay_within_Scope__c}<br/><br/>
+        <b>Current System Usage:</b> {!pro.Current_System_Usage__c}<br/><br/>
+        <!--<b>Custom Reports/Development:</b> {!pro.Custom_Reports_Development__c}<br/><br/>-->
+        <b>Partner Relationship:</b> {!pro.Partner_Relationship__c}<br/><br/><br/>
+        
+        <b>Key Accomplishments (last 2 weeks)</b><br/>
+        <apex:outputText escape="false" value="{!pro.Key_Accomplishments_Last_Two_Weeks__c}"/><br/><br/>
+        <b>Key Next Steps (next 2 weeks)</b><br/>
+        <apex:outputText escape="false" value="{!pro.Key_Next_Steps_next_2_weeks__c}"/><br/><br/>
+        <b>Issues / Questions / Notables</b><br/>
+        <apex:outputText escape="false" value="{!pro.Issues_Questions_Notables__c}"/><br/><br/>
+        <b>Upcoming Important Project / Invoicing Deadlines</b><br/>
+        <apex:outputText escape="false" value="{!pro.Client_Facing__c}"/><br/><br/>
+        
+                
+        <apex:outputPanel rendered="{!showDevWork}">
+            <b>Requires Developer Work</b><br/>
+            <apex:outputText escape="false" value="{!pro.Requires_Developer_Work__c}"/><br/><br/>
+        </apex:outputPanel>
+        
+        <b>Project Dashboard:</b> {!pro.Project_Dashboard__c}<br/><br/>        
+        
+    </apex:PageBlock>
+</body>
+</apex:page>

@@ -1,0 +1,977 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"card",
+				"cardYear"
+			],
+			[
+				"tr",
+				"true"
+			],
+			[
+				"sty",
+				"style	(String)"
+			],
+			[
+				"N",
+				"null"
+			],
+			[
+				"is",
+				"isMissingUserName"
+			],
+			[
+				"re",
+				"registration"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "src/classes/SyncController.cls",
+			"settings":
+			{
+				"buffer_size": 2112,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/classes/hqInt_BatchFetchObjectHelperClass.cls",
+			"settings":
+			{
+				"buffer_size": 58165,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/pages/RunFBSyncSingle.page",
+			"settings":
+			{
+				"buffer_size": 484,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "Searching 266 files for \"stagename\"\n\n/Users/nikets/Documents/workspace/Lucina_sandbox/src/classes/CountryListAcc.cls:\n  162          \n  163          //Opportunities Open\n  164:         lstoppty = [SELECT Id, Name,Account.Name, Description,Country__c,Country__r.Name, StageName\n  165                      FROM Opportunity \n  166                      WHERE AccountId =: selectedAccountId AND \n  167:                          (StageName = 'Stage 1 - Connect' OR \n  168:                           StageName = 'Stage 2 - Talking' OR \n  169:                           StageName = 'Stage 3 - Prospect' OR \n  170:                           StageName = 'Stage 4 - Proposal Development' OR \n  171:                           StageName = 'Stage 5 - Submitted' OR \n  172:                           StageName = 'Stage 6 - In Negotiations' OR \n  173:                           StageName = 'On Hold')];\n  174          \n  175          //Opportunities Closed \n  176:         lstopptyClosed = [SELECT Id, Name,Account.Name, Description,Country__c,Country__r.Name, StageName \n  177                            FROM Opportunity \n  178:                           WHERE AccountId =: selectedAccountId AND (StageName = 'Closed - Lost' OR StageName = 'Closed - Won')];\n  179          \n  180          \n  ...\n  222          \n  223          //Opportunities Open\n  224:         List<Opportunity> lstopptyChild = [SELECT Id, Name,Account.Name, Description,Country__c,Country__r.Name, StageName\n  225                                        FROM Opportunity \n  226                                        WHERE AccountId IN: childAccountIDs AND \n  227:                                              (StageName = 'Stage 1 - Connect' OR \n  228:                                               StageName = 'Stage 2 - Talking' OR \n  229:                                               StageName = 'Stage 3 - Prospect' OR \n  230:                                               StageName = 'Stage 4 - Proposal Development' OR \n  231:                                               StageName = 'Stage 5 - Submitted' OR \n  232:                                               StageName = 'Stage 6 - In Negotiations' OR \n  233:                                               StageName = 'On Hold')];\n  234           \n  235          lstoppty.addAll(lstopptyChild);\n  236          \n  237          //Opportunities Closed\n  238:         List<Opportunity> lstopptyClosedChild = [SELECT Id, Name,Account.Name, Description,Country__c,Country__r.Name, StageName \n  239                                                   FROM Opportunity \n  240                                                   WHERE AccountId IN: childAccountIDs AND \n  241:                                                  (StageName = 'Closed - Lost' OR StageName = 'Closed - Won')];\n  242           \n  243          lstopptyClosed.addAll(lstopptyClosedChild);   \n  ...\n  296                              FROM Project__c WHERE Implementing_Account__c =:recId AND Status__c ='Complete'];\n  297          \n  298:         lstoppty = [SELECT Id, Name,Account.Name, Description,Country__c,Country__r.Name, StageName \n  299                      FROM Opportunity WHERE AccountId =: recId AND \n  300:                     (StageName = 'Stage 1 - Connect' OR StageName = 'Stage 2 - Talking' OR \n  301:                      StageName = 'Stage 3 - Prospect' OR StageName = 'Stage 4 - Proposal Development' OR \n  302:                      StageName = 'Stage 5 - Submitted' OR StageName = 'Stage 6 - In Negotiations' OR StageName = 'On Hold')];\n  303           \n  304:         lstopptyClosed = [SELECT Id, Name,Account.Name, Description,Country__c,Country__r.Name, StageName \n  305                            FROM Opportunity WHERE AccountId =: recId AND \n  306:                           (StageName = 'Closed - Lost' OR StageName = 'Closed - Won')];\n  307      }\n  308      \n\n/Users/nikets/Documents/workspace/Lucina_sandbox/src/classes/FogBugzEndpoint.cls:\n   63          			}\n   64          			\n   65: 	                o.StageName = fbCase.area;\n   66  	                o.Fogbugz_Assigned_To__c = fbCase.assignedTo;\n   67  	                // @fixme - Client field?\n\n/Users/nikets/Documents/workspace/Lucina_sandbox/src/classes/FogBugzSynchronizerBatch.cls:\n  170                      Opportunity o = new Opportunity(\n  171                          Name = 'Synchronizing',\n  172:                         StageName = 'Synchronizing',\n  173                          Fogbugz_Ticket_Number__c = fbCase.caseId,\n  174                          Fogbugz_Opened_By__c = fbCase.ixPersonOpenedBy,\n\n/Users/nikets/Documents/workspace/Lucina_sandbox/src/classes/FogBugzUtils.cls:\n   20          fbCase.externalBugID = o.Id;\n   21          fbCase.project = FOGBUGZ_CASE_PROJECT;\n   22:         fbCase.area = o.StageName;\n   23          fbCase.status = FOGBUGZ_CASE_STATUS;\n   24          fbCase.priority = FOGBUGZ_CASE_PRIORITY;\n   ..\n   43                                      Owner.Email,\n   44                                      Owner.Id,\n   45:                                     StageName,\n   46                                      Amount,\n   47                                      Fogbugz_Most_Recent_Note__c,\n   ..\n   70                                     Owner.Email,\n   71                                     Owner.Id,\n   72:                                    StageName,\n   73                                     Amount,\n   74                                     Fogbugz_Most_Recent_Note__c,\n   ..\n  125  	            }\n  126  	                \n  127: 	            o.StageName = fbCase.area == null ? null : (fbCase.area.length() > 40 ? fbCase.area.substring(0, 40) : fbCase.area);\n  128  	            o.Fogbugz_Assigned_To__c = fbCase.assignedTo;\n  129  	            // @fixme - Client field?\n\n/Users/nikets/Documents/workspace/Lucina_sandbox/src/classes/LocationControllerTest.cls:\n   20          Opportunity opp = new Opportunity();\n   21          opp.Name = 'Test';\n   22:         opp.StageName = 'Stage 1 - Connect';\n   23          opp.CloseDate = Date.newInstance(2013, 4, 9);\n   24          opp.Area__c = 'Health';\n\n/Users/nikets/Documents/workspace/Lucina_sandbox/src/classes/OpenOpportunityEmailUtils.cls:\n   42          sortedStages.sort();\n   43          \n   44:         for(String stageName :sortedStages) {           \n   45              \n   46:             String stageTable = '<tr><table class=\"main-stage-table\" style=\"width:100%;border:1px solid #E3DEB8;\">' + SUB_TITLE.replace('[SUB_TITLE]', stageName);\n   47              \n   48              /**************************************************\n   49  			Comments: for each stage we call buildEmailStageTable     \n   50  			**************************************************/\n   51:             stageTable += '<tr><td>' + buildEmailStageTable(stageName, stagedOpportunities.get(stageName)) + '</td></tr>';\n   52                          \n   53              /**************************************************\n   54              Comments: for each stage we call getEmailStageComments (if there are no comments, the input text is generated anyway)\n   55              **************************************************/                        \n   56:             stageTable += '<tr><td>' + getEmailStageComments(stageComments.get(stageName)) + '</td></tr>';\n   57                          \n   58              stageTable += '</table></tr>';            \n   ..\n   74  	Method Comments: Method which returns the content of a HTML table for a Stage   \n   75  	**************************************************/\n   76:     public static String buildEmailStageTable(String stageName, Opportunity[] opportunities) {\n   77          \n   78          String result = '<table class=\"stage-table\" cellspacing=\"0\" style=\"width:100%;border:1px solid #e0e3e5\">[THEADER][TBODY]</table>';      \n   ..\n  182  		// end added by Nick\n  183  			\n  184:         if (earlyStagesSet.contains(opp.StageName)) {            \n  185              rowStart = opp.Total_Days_Not_Updated__c > daysNotUpdatedLimitEarlyStages \n  186                                     ? '<tr style=\"background:' + RED_COLOR + '\">' \n\n/Users/nikets/Documents/workspace/Lucina_sandbox/src/classes/OpenOpportunityFieldsUIController.cls:\n    8  \n    9      public OpenOpportunityListData stageContainer;\n   10:     public String stageName {get; set;}\n   11      public String htmlTable {get; set;}\n   12  \n   ..\n   18  \n   19          stageContainer = value;    	\n   20:         htmlTable = OpenOpportunityEmailUtils.buildEmailStageTable(stageName, stageContainer.opportunities);\n   21      }\n   22      \n\n/Users/nikets/Documents/workspace/Lucina_sandbox/src/classes/OpenOpportunityListData.cls:\n    7   public with sharing class OpenOpportunityListData {\n    8  \n    9:     public String stageName {get; set;}\n   10      public Opportunity[] opportunities {get; set;} \n   11  \n   12:     public OpenOpportunityListData(String stageName, Opportunity[] opportunities) {\n   13      	\n   14      	this.opportunities = opportunities;\n   15:     	this.stageName = stageName;    	\n   16      }\n   17  \n\n/Users/nikets/Documents/workspace/Lucina_sandbox/src/classes/OpenOpportunityMailer.cls:\n   68          \n   69          // Remove fresh opportunities\n   70:         for (String stageName :stagedOpportunities.keySet()) {          \n   71              \n   72              Opportunity[] opportunities = new Opportunity[] {};\n   73              \n   74:             for(Opportunity opportunity :stagedOpportunities.get(stageName)) {\n   75                  \n   76:                 if (earlyStagesSet.contains(opportunity.StageName)) {\n   77                      \n   78                      if (opportunity.Total_Days_Not_Updated__c > daysNotUpdatedLimitEarlyStages && !opportunity.long_wait__c) {                   \n   ..\n   89  \n   90              if (!opportunities.isEmpty()) {\n   91:               redStagedOpportunities.put(stageName, opportunities);\n   92              }\n   93          } \n\n/Users/nikets/Documents/workspace/Lucina_sandbox/src/classes/OpenOpportunityReportController.cls:\n   34  \n   35          String queryValues = this.getOpenOpportunitiesQueryValues();\n   36:         String sql = 'SELECT ' + queryValues + ' FROM Opportunity WHERE IsClosed = false AND StageName IN :stages';\n   37               \n   38          result = Database.query(sql);                                      \n   ..\n   44          Comments: Filled in with default values\n   45          **************************************************/          \n   46:         String queryValues = 'Id,Name,StageName,CreatedDate,Amount,AccountId,Total_Days_Not_Updated__c,Stage_Name_Updated_Date__c,Stage_Duration__c,Business_Unit_Owner__c,' +\n   47                                  'Business_Unit_Owner__r.Name,Account.Name,OwnerId,Owner.Name,Fogbugz_Link__c,Fogbugz_Probability__c,Fogbugz_Days_Not_Updated__c,' +                       \n   48                                  'Fogbugz_Ticket_Number__c,Fogbugz_Assigned_To__c,Fogbugz_Last_Updated_Date__c,long_wait__c';\n   ..\n   76                  queryValues += ',Total_Days_Not_Updated__c';\n   77              }\n   78:             if (!queryValues.contains('StageName')) {\n   79:                 queryValues += ',StageName';\n   80              }\n   81              if(!queryValues.contains('long_wait__c')) {\n   ..\n  119          /* Nick Nestle May 9, 2013\n  120          *******/\n  121:         String sql = 'SELECT ' + queryValues + ' FROM Opportunity WHERE IsClosed = false AND (OwnerId IN :usersId OR Opportunity_Owning_Entity__c IN :usersId) AND StageName IN :stages';\n  122               \n  123          result = Database.query(sql);                                      \n  ...\n  138      	for(Opportunity opportunity :opportunities) {\n  139      		\n  140:     		String stageName = opportunity.StageName;\n  141      		\n  142:     		if (result.containsKey(stageName)) {\n  143      			\n  144:     			result.get(stageName).add(opportunity);    			\n  145      		}\n  146      		else {\n  147      			\n  148:     			result.put(stageName, new Opportunity[] {opportunity});\n  149      		}    		\n  150      	}\n  ...\n  160          for(Opportunity opportunity :opportunities) {\n  161              \n  162:             String stageName = opportunity.StageName;\n  163              \n  164:             if (result.containsKey(stageName)) {\n  165                  \n  166:                 result.get(stageName).add(opportunity);             \n  167              }\n  168              else {\n  169                  \n  170:                 result.put(stageName, new Opportunity[] {opportunity});\n  171              }           \n  172          }\n  ...\n  180               \n  181          result = [SELECT \n  182:                        StageName,\n  183                         CreatedDate, \n  184                         Stage_Name_Updated_Date__c,\n  185                                                \n  186:                        (SELECT StageName, CreatedDate FROM OpportunityHistories)                       \n  187                         \n  188                     FROM Opportunity \n  ...\n  200                  for (OpportunityHistory oh :opp.OpportunityHistories) {                   \n  201                      \n  202:                     String ohStageName = oh.StageName;\n  203                      Date createdDate = Date.valueOf(oh.CreatedDate);\n  204                                          \n  205:                     if (ohStageName != opp.StageName) {\n  206                          \n  207                          opp.Stage_Name_Updated_Date__c = createdDate;\n\n/Users/nikets/Documents/workspace/Lucina_sandbox/src/classes/OpenOpportunityReportUIController.cls:\n   35      		stageList.sort();\n   36      		\n   37:     		for (String stageName :stageList) {    			\n   38:     			stagedComments.put(stageName, '');\n   39:     			stagedListData.add(new OpenOpportunityListData(stageName, stagedOpportunities.get(stageName)));\n   40      		}\n   41      	}\n   ..\n   63  		            stageList.sort();		        	        	\n   64  		            \n   65: 		            for (String stageName :stageList) {\n   66: 		            	stagedComments.put(stageName, '');\n   67: 		                stagedListData.add(new OpenOpportunityListData(stageName, stagedOpportunities.get(stageName)));\n   68  		            }\n   69  		        }        \n\n/Users/nikets/Documents/workspace/Lucina_sandbox/src/classes/OpenOpportunityTest.cls:\n   74          Test.startTest();        \n   75          Id opportunityId = createOpportunity();                   \n   76:         Opportunity opp = [SELECT StageName FROM Opportunity WHERE Id = :opportunityId];\n   77:         opp.StageName = 'Stage 2 - Talking';\n   78          update opp;         \n   79          Test.stopTest();        \n   ..\n  125          opportunity.Fogbugz_Ticket_Number__c = '12345';\n  126          opportunity.Fogbugz_Last_Updated_Date__c = Date.today();\n  127:         opportunity.StageName = 'Stage 1 - Connect';\n  128          opportunity.CloseDate = Date.today();\n  129          opportunity.AccountId = accountId;                \n  ...\n  184          setSetting(id);\n  185          \n  186:         Opportunity opp = [select Id, StageName from Opportunity where Id =: id];\n  187:         opp.StageName = 'Stage 4 - Proposal Development';\n  188          update opp;\n  189          \n\n/Users/nikets/Documents/workspace/Lucina_sandbox/src/classes/OpenOpportunityUtils.cls:\n    1  public with sharing class OpenOpportunityUtils {\n    2  \n    3:     public static void updateStageName(Opportunity[] opportunities) {\n    4      \n    5          for (Opportunity opportunity :opportunities) {\n    .\n    9      }\n   10  \n   11:     public static void updateStageName(Opportunity[] opportunities, Map<Id, Opportunity> oldOpportunities) {\n   12      \n   13          for (Opportunity opportunity :opportunities) {\n   ..\n   15              Opportunity oldOpportunity = oldOpportunities.get(opportunity.Id);\n   16              \n   17:             if (oldOpportunity.StageName != opportunity.StageName) {            \n   18                  opportunity.Stage_Name_Updated_Date__c = Date.today();	\n   19              }\n\n/Users/nikets/Documents/workspace/Lucina_sandbox/src/classes/OpportunityContractControllerTest.cls:\n   20      	Opportunity opp = new Opportunity();\n   21      	opp.Name = 'Test';\n   22:     	opp.StageName = 'Stage 1 - Connect';\n   23      	opp.CloseDate = Date.newInstance(2013, 4, 9);\n   24      	opp.Area__c = 'Health';\n\n/Users/nikets/Documents/workspace/Lucina_sandbox/src/classes/OpportunityCountryTriggerTest.cls:\n   15          Opportunity opp = new Opportunity();\n   16          opp.Name = 'Test';\n   17:         opp.StageName = 'Stage 1 - Connect';\n   18          opp.CloseDate = Date.newInstance(2013, 4, 9);\n   19          opp.Implementing_Business_Unit__c = bunit.Id;\n   ..\n   61          Opportunity opp = new Opportunity();\n   62          opp.Name = 'Test';\n   63:         opp.StageName = 'Stage 1 - Connect';\n   64          opp.CloseDate = Date.newInstance(2013, 4, 9);\n   65          opp.Implementing_Business_Unit__c = bunit.Id;\n   ..\n  111          Opportunity opp = new Opportunity();\n  112          opp.Name = 'Test';\n  113:         opp.StageName = 'Stage 1 - Connect';\n  114          opp.CloseDate = Date.newInstance(2013, 4, 9);\n  115          opp.Implementing_Business_Unit__c = bunit.Id;\n\n/Users/nikets/Documents/workspace/Lucina_sandbox/src/classes/OpportunityProductTriggerTest.cls:\n   15  		insert pbe;\n   16  		\n   17: 		Opportunity opp = new Opportunity(Name='Test Opp', CloseDate=date.today(), StageName='Stage 1 - Connecting');\n   18  		insert opp;\n   19  		\n   ..\n   46          insert pbe3;\n   47          \n   48:         Opportunity opp = new Opportunity(Name='Test Opp', CloseDate=date.today(), StageName='Stage 1 - Connecting');\n   49          insert opp;\n   50          \n\n/Users/nikets/Documents/workspace/Lucina_sandbox/src/classes/OpportunityTriggers.cls:\n   26  	        FogBugzAPI fbAPI = new FogBugzAPI();\n   27  	        \n   28: 	        boolean close = CLOSED_STAGES.contains(o.StageName);\n   29  	        \n   30  	        String fbCaseId = fbAPI.createCase(fbCase, close);\n   ..\n   65      	\n   66      	if ((oppNew.Name != oppOld.Name) || \n   67:     	    (oppNew.StageName != oppOld.StageName) || \n   68      	    (oppOld.Fogbugz_Probability__c != oppNew.Fogbugz_Probability__c) ||\n   69      	    (oppOld.Product_Text__c != oppNew.Product_Text__c)) {\n   ..\n   76      			                   (oppNew.Product_Text__c != oppOld.Product_Text__c);\n   77      			                   \n   78:     			updateCase(oppNew.Id, editTags, oppNew.Product_Text__c, oppOld.Product_Text__c, oppOld.StageName);\n   79  \n   80      			                \n   ..\n  144              }\n  145              \n  146:             boolean close = CLOSED_STAGES.contains(o.StageName);\n  147              \n  148:             boolean reopen = CLOSED_STAGES.contains(oldStage) && (!o.StageName.equals(oldStage));\n  149              \n  150              String fbCaseId = fbAPI.updateCaseTitleStageTag(fbCase, editTags, tags, close, reopen);\n\n/Users/nikets/Documents/workspace/Lucina_sandbox/src/classes/OpportunityTriggersTest.cls:\n   16          Opportunity opp = new Opportunity();\n   17          opp.Name = 'Test';\n   18:         opp.StageName = 'Stage 1 - Connect';\n   19          opp.CloseDate = Date.newInstance(2013, 4, 9);\n   20          opp.Implementing_Business_Unit__c = bunit.Id;\n   ..\n   36          Opportunity opp = new Opportunity();\n   37          opp.Name = 'Test';\n   38:         opp.StageName = 'Stage 1 - Connect';\n   39          opp.CloseDate = Date.newInstance(2013, 4, 9);\n   40          opp.Implementing_Business_Unit__c = bunit.Id;\n   ..\n   47          update opp;\n   48          \n   49:         opp.StageName = 'Stage 2 - Talking';\n   50          update opp;\n   51          \n   ..\n   60          Opportunity opp = new Opportunity();\n   61          opp.Name = 'Test';\n   62:         opp.StageName = 'Stage 1 - Connect';\n   63          opp.CloseDate = Date.newInstance(2013, 4, 9);\n   64          opp.Implementing_Business_Unit__c = bunit.Id;\n   ..\n   82          Opportunity opp = new Opportunity();\n   83          opp.Name = 'Test';\n   84:         opp.StageName = 'Stage 1 - Connect';\n   85          opp.CloseDate = Date.newInstance(2013, 4, 9);\n   86          opp.Implementing_Business_Unit__c = bunit.Id;\n   ..\n   90          Test.startTest();\n   91          \n   92:         opp.StageName = 'Closed';\n   93          update opp;\n   94          \n   95:         opp.StageName = 'Stage 1 - Connect';\n   96          update opp;\n   97          \n   ..\n  106          Opportunity opp = new Opportunity();\n  107          opp.Name = 'Test';\n  108:         opp.StageName = 'Closed';\n  109          opp.CloseDate = Date.newInstance(2013, 4, 9);\n  110          opp.Implementing_Business_Unit__c = bunit.Id;\n\n/Users/nikets/Documents/workspace/Lucina_sandbox/src/classes/OpportunityTriggerSync.cls:\n   99  		}\n  100  		\n  101: 		for (Opportunity o : [SELECT StageName FROM Opportunity WHERE Id IN :opptyStages.keySet()]) {\n  102: 			opptyStages.put(o.Id, o.StageName);\n  103  		}\n  104  		\n  ...\n  180  			\n  181  		for (Opportunity o : newOppties) {\n  182: 			opptyStages.put(o.Id, o.StageName);\n  183  		}\n  184  		\n  ...\n  214  		o.Name = 'Test';\n  215  		o.CloseDate = System.today();\n  216: 		o.StageName = 'Test';\n  217  		insert o;\n  218  		\n\n/Users/nikets/Documents/workspace/Lucina_sandbox/src/classes/TestFogBugzSynchronization.cls:\n   23          Opportunity o = new Opportunity(\n   24              Name = 'Test name',\n   25:             StageName = 'Test stage',\n   26              CloseDate = Date.today(),\n   27              Fogbugz_Ticket_Number__c = 'Should not change'\n   ..\n   62          Opportunity o = new Opportunity(\n   63              Name = 'Change me',\n   64:             StageName = 'Change me',\n   65              CloseDate = Date.today(),\n   66              Fogbugz_Assigned_To__c = 'Change me',\n   ..\n   87          Opportunity refreshed = [select Id,\n   88                                          Name,\n   89:                                         StageName,\n   90                                          Fogbugz_Ticket_Number__c,\n   91                                          Fogbugz_Assigned_To__c,\n   ..\n   97                                   where Id = :o.Id];\n   98  \n   99:         System.assertEquals('Test area', refreshed.StageName, 'Opportunity stage not updated');\n  100          System.assertEquals('Test assignee', refreshed.Fogbugz_Assigned_To__c, 'Assignee not updated');\n  101          System.assertEquals('Test title', refreshed.Name, 'Name not updated');\n\n123 matches across 20 files\n",
+			"settings":
+			{
+				"buffer_size": 22725,
+				"line_ending": "Unix",
+				"name": "Find Results",
+				"scratch": true
+			}
+		},
+		{
+			"file": "src/classes/OpportunityTriggerSync.cls",
+			"settings":
+			{
+				"buffer_size": 6987,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 67.0,
+		"last_filter": "Package Control: insta",
+		"selected_items":
+		[
+			[
+				"Package Control: insta",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/nikets/Documents/workspace/Lucina_sandbox",
+		"/Users/nikets/Documents/workspace/Lucina_sandbox/src",
+		"/Users/nikets/Documents/workspace/Lucina_sandbox/src/classes"
+	],
+	"file_history":
+	[
+		"/Users/nikets/Documents/workspace/Lucina_sandbox/src/classes/OpportunityTriggers.cls",
+		"/Users/nikets/Documents/workspace/Lucina_sandbox/src/classes/OpenOpportunityUtils.cls",
+		"/Users/nikets/Documents/workspace/Lucina_sandbox/src/classes/OpenOpportunityListData.cls",
+		"/Users/nikets/Documents/workspace/Lucina_sandbox/src/classes/FogBugzUtils.cls",
+		"/Users/nikets/Documents/workspace/Lucina_sandbox/src/classes/FogBugzSynchronizerBatch.cls",
+		"/Users/nikets/Documents/workspace/Lucina_sandbox/src/classes/FogBugzEndpoint.cls",
+		"/Users/nikets/Documents/workspace/Lucina_sandbox/src/classes/OpportunityTriggerSync.cls",
+		"/Users/nikets/Documents/workspace/Lucina_sandbox/src/classes/OpenOpportunityReportController.cls",
+		"/Users/nikets/Documents/workspace/Lucina_sandbox/src/classes/OpenOpportunityMailer.cls",
+		"/Users/nikets/Documents/workspace/Lucina_sandbox/src/classes/OpenOpportunityFieldsUIController.cls",
+		"/Users/nikets/Documents/workspace/Lucina_sandbox/src/classes/OpenOpportunityEmailUtils.cls",
+		"/Users/nikets/Documents/workspace/Lucina_sandbox/src/classes/OpportunityProductTrigger.cls",
+		"/Users/nikets/Documents/workspace/Lucina_sandbox/src/classes/OpportunityCountryTrigger.cls",
+		"/Users/nikets/Documents/workspace/Lucina_sandbox/src/classes/OpenOpportunitiesNeedUpdateScheduler.cls",
+		"/Users/nikets/Documents/workspace/AFBC/src/classes/OpportunityPaymantBatch.cls",
+		"/Users/nikets/Documents/AA",
+		"/Users/nikets/Documents/A",
+		"/Users/nikets/Desktop/MarketingReportControllerTest.cls",
+		"/Users/nikets/Desktop/MarketingReport.Page",
+		"/Users/nikets/Documents/workspace/AFBC/src/classes/OpportunityHandlerTest.cls",
+		"/Users/nikets/Documents/workspace/apn_apndevsandbox/src/pages/SiteLogin.page",
+		"/Users/nikets/Documents/workspace/apn_apndevsandbox/src/pages/SelfRegisterPartner.page",
+		"/Users/nikets/Documents/workspace/apn_apndevsandbox/src/classes/SelfRegisterController.cls",
+		"/Users/nikets/Documents/workspace/apn_apndevsandbox/src/classes/SiteLoginController.cls",
+		"/Users/nikets/Documents/workspace/apn_apndevsandbox/src/classes/SetSecurityQuestionController.cls",
+		"/Users/nikets/Documents/workspace/apn_apndevsandbox/src/pages/SetSecurityQuestion.page",
+		"/Users/nikets/Documents/workspace/apn_apndevsandbox/src/classes/ForgotPasswordController.cls",
+		"/Users/nikets/Documents/workspace/apn_apndevsandbox/src/pages/ForgotPassword.page",
+		"/Users/nikets/Documents/workspace/apn_apndevsandbox/src/classes/ForgotPasswordVerifyController.cls",
+		"/Users/nikets/Documents/workspace/apn_apndevsandbox/src/pages/ForgotPasswordVerify.page",
+		"/Users/nikets/Documents/workspace/apn_apndevsandbox/src/pages/ForgotPasswordVerifyChina.page",
+		"/Users/nikets/Documents/workspace/apn_apndevsandbox/src/pages/SelfRegisterPartnerChina.page",
+		"/Users/nikets/Documents/workspace/apn_apndevsandbox/src/pages/SelfRegisterPartnerJapan.page",
+		"/Users/nikets/Documents/workspace/apn_apndevsandbox/src/pages/ForgotPasswordVerifyJapan.page",
+		"/Users/nikets/Documents/workspace/apn_apndevsandbox/src/pages/SiteLoginJapan.page",
+		"/Users/nikets/Documents/workspace/apn_apndevsandbox/src/pages/SiteLoginChina.page",
+		"/Users/nikets/Documents/workspace/apn_apndevsandbox/src/components/PartnerApplication.component",
+		"/Users/nikets/Documents/workspace/apn_apndevsandbox/src/pages/AWS_Partner_Application.page",
+		"/Users/nikets/Documents/workspace/apn_apndevsandbox/src/pages/ForgotPasswordJapan.page",
+		"/Users/nikets/Documents/workspace/apn_apndevsandbox/src/pages/ForgotPasswordChina.page",
+		"/Users/nikets/Documents/workspace/apn_apndevsandbox/src/triggers/AccountAll.trigger",
+		"/Users/nikets/Documents/workspace/apn_apndevsandbox/src/classes/AccountTriggers.cls",
+		"/Users/nikets/Library/Application Support/Sublime Text 3/Packages/User/mavensmate.sublime-settings"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			"/Users/nikets/Documents/workspace/Lucina_sandbox/src/classes",
+			"/Users/nikets/Documents/workspace/Lucina_sandbox/src",
+			"/Users/nikets/Documents/workspace/apn_apndevsandbox/src"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"stagename",
+			"getOpptyStages",
+			"stageName",
+			"area",
+			"stage",
+			"StageName",
+			"stagename",
+			"status",
+			"update",
+			"update opp",
+			"status",
+			"opportunity",
+			"update",
+			"last_modified",
+			"project_space_metadata",
+			"last_modified",
+			"Probability",
+			"upsert",
+			"syncOpportunityFromFB",
+			"runSingleSync",
+			"0",
+			"One_Time_Push__c",
+			"email",
+			"NoOfChangeOwner",
+			"MarketingReportControllerTest",
+			"ChargentSFA__Card_Type__c",
+			"Credit_Card_Type__c",
+			"VFPage_VerifySelfRegistration_ThankYou",
+			"addMessage",
+			"isNewPartnerTokenMissing",
+			"addmessage",
+			"isEmailSent",
+			".errorMsg"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			""
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 4,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "src/classes/SyncController.cls",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2112,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1515,
+								1536
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/MavensMate/sublime/lang/Apex.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "src/classes/hqInt_BatchFetchObjectHelperClass.cls",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 58165,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								54431,
+								54444
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/MavensMate/sublime/lang/Apex.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "src/pages/RunFBSyncSingle.page",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 484,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 22725,
+						"regions":
+						{
+							"match":
+							{
+								"flags": 112,
+								"regions":
+								[
+									[
+										267,
+										276
+									],
+									[
+										424,
+										433
+									],
+									[
+										493,
+										502
+									],
+									[
+										562,
+										571
+									],
+									[
+										632,
+										641
+									],
+									[
+										714,
+										723
+									],
+									[
+										785,
+										794
+									],
+									[
+										862,
+										871
+									],
+									[
+										1045,
+										1054
+									],
+									[
+										1182,
+										1191
+									],
+									[
+										1213,
+										1222
+									],
+									[
+										1453,
+										1462
+									],
+									[
+										1665,
+										1674
+									],
+									[
+										1754,
+										1763
+									],
+									[
+										1843,
+										1852
+									],
+									[
+										1933,
+										1942
+									],
+									[
+										2035,
+										2044
+									],
+									[
+										2126,
+										2135
+									],
+									[
+										2223,
+										2232
+									],
+									[
+										2492,
+										2501
+									],
+									[
+										2731,
+										2740
+									],
+									[
+										2762,
+										2771
+									],
+									[
+										3107,
+										3116
+									],
+									[
+										3220,
+										3229
+									],
+									[
+										3255,
+										3264
+									],
+									[
+										3319,
+										3328
+									],
+									[
+										3355,
+										3364
+									],
+									[
+										3432,
+										3441
+									],
+									[
+										3469,
+										3478
+									],
+									[
+										3512,
+										3521
+									],
+									[
+										3657,
+										3666
+									],
+									[
+										3782,
+										3791
+									],
+									[
+										3813,
+										3822
+									],
+									[
+										4016,
+										4025
+									],
+									[
+										4399,
+										4408
+									],
+									[
+										4789,
+										4798
+									],
+									[
+										5066,
+										5075
+									],
+									[
+										5355,
+										5364
+									],
+									[
+										5562,
+										5571
+									],
+									[
+										5984,
+										5993
+									],
+									[
+										6288,
+										6297
+									],
+									[
+										6504,
+										6513
+									],
+									[
+										6805,
+										6814
+									],
+									[
+										6840,
+										6849
+									],
+									[
+										7289,
+										7298
+									],
+									[
+										7626,
+										7635
+									],
+									[
+										7930,
+										7939
+									],
+									[
+										8331,
+										8340
+									],
+									[
+										8540,
+										8549
+									],
+									[
+										8791,
+										8800
+									],
+									[
+										8929,
+										8938
+									],
+									[
+										9049,
+										9058
+									],
+									[
+										9061,
+										9070
+									],
+									[
+										9275,
+										9284
+									],
+									[
+										9511,
+										9520
+									],
+									[
+										9612,
+										9621
+									],
+									[
+										9920,
+										9929
+									],
+									[
+										10269,
+										10278
+									],
+									[
+										10579,
+										10588
+									],
+									[
+										11183,
+										11192
+									],
+									[
+										11238,
+										11247
+									],
+									[
+										11576,
+										11585
+									],
+									[
+										11801,
+										11810
+									],
+									[
+										11825,
+										11834
+									],
+									[
+										11886,
+										11895
+									],
+									[
+										11940,
+										11949
+									],
+									[
+										12051,
+										12060
+									],
+									[
+										12244,
+										12253
+									],
+									[
+										12268,
+										12277
+									],
+									[
+										12341,
+										12350
+									],
+									[
+										12413,
+										12422
+									],
+									[
+										12560,
+										12569
+									],
+									[
+										12744,
+										12753
+									],
+									[
+										12949,
+										12958
+									],
+									[
+										13265,
+										13274
+									],
+									[
+										13280,
+										13289
+									],
+									[
+										13448,
+										13457
+									],
+									[
+										13465,
+										13474
+									],
+									[
+										13758,
+										13767
+									],
+									[
+										13822,
+										13831
+									],
+									[
+										13899,
+										13908
+									],
+									[
+										13934,
+										13943
+									],
+									[
+										14097,
+										14106
+									],
+									[
+										14162,
+										14171
+									],
+									[
+										14250,
+										14259
+									],
+									[
+										14285,
+										14294
+									],
+									[
+										14592,
+										14601
+									],
+									[
+										14666,
+										14675
+									],
+									[
+										14943,
+										14952
+									],
+									[
+										15193,
+										15202
+									],
+									[
+										15256,
+										15265
+									],
+									[
+										15533,
+										15542
+									],
+									[
+										15711,
+										15720
+									],
+									[
+										16015,
+										16024
+									],
+									[
+										16040,
+										16049
+									],
+									[
+										16362,
+										16371
+									],
+									[
+										16691,
+										16700
+									],
+									[
+										16957,
+										16966
+									],
+									[
+										17223,
+										17232
+									],
+									[
+										17590,
+										17599
+									],
+									[
+										17796,
+										17805
+									],
+									[
+										18088,
+										18097
+									],
+									[
+										18276,
+										18285
+									],
+									[
+										18296,
+										18305
+									],
+									[
+										18691,
+										18700
+									],
+									[
+										18849,
+										18858
+									],
+									[
+										18957,
+										18966
+									],
+									[
+										19309,
+										19318
+									],
+									[
+										19575,
+										19584
+									],
+									[
+										19798,
+										19807
+									],
+									[
+										19985,
+										19994
+									],
+									[
+										20251,
+										20260
+									],
+									[
+										20480,
+										20489
+									],
+									[
+										20564,
+										20573
+									],
+									[
+										20751,
+										20760
+									],
+									[
+										21044,
+										21053
+									],
+									[
+										21143,
+										21152
+									],
+									[
+										21271,
+										21280
+									],
+									[
+										21386,
+										21395
+									],
+									[
+										21635,
+										21644
+									],
+									[
+										21884,
+										21893
+									],
+									[
+										22168,
+										22177
+									],
+									[
+										22454,
+										22463
+									]
+								],
+								"scope": ""
+							}
+						},
+						"selection":
+						[
+							[
+								20970,
+								20970
+							]
+						],
+						"settings":
+						{
+							"detect_indentation": false,
+							"line_numbers": false,
+							"output_tag": 1,
+							"result_base_dir": "",
+							"result_file_regex": "^([A-Za-z\\\\/<].*):$",
+							"result_line_regex": "^ +([0-9]+):",
+							"scroll_past_end": true,
+							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 6378.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "src/classes/OpportunityTriggerSync.cls",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6987,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5671,
+								5680
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/MavensMate/sublime/lang/Apex.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2423.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.MavensMate-OutputPanel":
+	{
+		"height": 0.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "Lucina_sandbox.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 208.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

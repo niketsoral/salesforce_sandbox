@@ -1,0 +1,19 @@
+{
+    "username": "niketsoral+dimagi@gmail.com.dsandbox", 
+    "environment": "sandbox", 
+    "project_name": "Lucina_sandbox", 
+    "workspace": "/Users/nikets/Documents/workspace", 
+    "org_url": "", 
+    "namespace": "", 
+    "id": "36W3M1HSEFD77OCPUCPY5AGV09NTIWKH", 
+    "metadata_container": "1dcm0000000GJ1jAAG", 
+    "subscription": [
+        "ApexClass", 
+        "ApexComponent", 
+        "ApexPage", 
+        "ApexTrigger", 
+        "CustomObject", 
+        "Profile", 
+        "StaticResource"
+    ]
+}
